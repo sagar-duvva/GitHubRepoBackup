@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginxv6pod
+  namespace: test
+  labels:
+    app: nginxv6
+spec:
+  containers:
+    - name: nginxv6container
+      image: azdemojan2026/nginx-dashboard:1.0.0
+      ports:
+        - containerPort: 80

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-nginxapp-loadbalancer-service
+  namespace: test
+  labels:
+    app: frontend-nginxapp
+    tier: frontend
+spec:
+  type: LoadBalancer # ClusterIP, NodePort
+  selector:
+    app: frontend-nginxapp
+  ports:
+    - name: http
+      port: 80 # Service Port
+      targetPort: 80 # Container Port

@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-backend-service
+  namespace: test
+  labels:
+    app: backend-restapp
+    tier: backend
+spec:
+  #type: ClusterIP  # ClusterIP is a default Service and need not to specify it
+  selector:
+    app: backend-restapp
+  ports:
+    - name: http
+      port: 8080 # ClsuterIP Service Port
+      targetPort: 8080 # Container Port

@@ -1,0 +1,29 @@
+apiVersion: apps/v1                 # API group and version for Deployment resource
+kind: Deployment                    # Resource type we are creating
+
+metadata:
+  name: backend-restapp-deployment  # Name of the Deployment
+  namespace: test                   # Namespace where it will be created
+  labels:                           # Labels attached to the Deployment object
+    app: backend-restapp            # Application name label
+    tier: backend                   # Logical tier label (backend layer)
+
+spec:
+  replicas: 3                       # Number of Pod replicas to run
+
+  selector:                         # How the Deployment finds which Pods belong to it
+    matchLabels:
+      app: backend-restapp          # MUST match template.metadata.labels
+
+  template:                         # Blueprint for creating Pods
+    metadata:
+      labels:                       # Labels assigned to each created Pod
+        app: backend-restapp        # Must match selector.matchLabels
+        tier: backend               # Pod tier label
+
+    spec:                           # Pod specification starts here
+      containers:                   # List of containers inside the Pod
+        - name: backend-restapp-container  # Container name
+          image: stacksimplify/kube-helloworld:1.0.0  # Docker image used
+          ports:
+            - containerPort: 8080   # Port exposed inside the container

@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginxv6pod-deployment
+  namespace: test
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: nginxv6
+  strategy:
+    type: RollingUpdate
+  template:
+    metadata:
+      name: nginxv6pod-pod
+      labels:
+        app: nginxv6
+    spec:
+      containers:
+        - name: nginxv6-container
+          image: azdemojan2026/nginx-dashboard:1.0.0
+          ports:
+            - containerPort: 80
